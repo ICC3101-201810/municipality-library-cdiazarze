@@ -20,7 +20,7 @@ namespace Municipalidad
       while (option < 7)
       {
         Console.WriteLine("Bievenido al programa del registro civil, que desea hacer:\n(1) Registrar Persona\n(2) Registrar Propiedad\n(3) " +
-          "Registar Vehiculo\n(4) Modificar Propiedad\n(5) Modificar Dueño de Automovil\n(6) Modificar Resgistro Persona");
+          "Registar Vehiculo\n(4) Modificar Propiedad\n(5) Modificar Dueño de Automovil\n(6) Modificar Resgistro Persona\n(7) Salir");
         option = Int32.Parse(Console.ReadLine());
         if (option == 1)
         {
@@ -192,7 +192,16 @@ namespace Municipalidad
                 p.getAbandoned();
                 Console.WriteLine("Exito! Usted ya no tiene padres!: ");
               }
-
+              if (eleccion2 == 4)
+              {
+                Console.WriteLine("Seleccione nuevo Padre");
+                for (int j = 0; j < personas.Count(); j++)
+                {
+                  Console.WriteLine("(" + (j + 1) + ") " + personas[j].Rut + ": " + personas[j].First_name + " " + personas[j].Last_name);
+                }
+                p.getAdopted(personas[Int32.Parse(Console.ReadLine()) - 1]);
+                Console.WriteLine("Que bueno! Alguien lo quiere!!..");
+              }
             }
           }
           else Console.WriteLine("No existen personas registrados, debe registrar primero alguna persona");
