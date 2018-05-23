@@ -1,0 +1,3 @@
+El constructor de persona necesita de una direccion y el constructor de direccion necesita de persona.
+Esto crea una referencia circular, donde uno no puede ser creado sin el otro. Por lo que al crear un objeto u otro de
+se necesitaría definir como NULL la referencia y luego asignarla. 
