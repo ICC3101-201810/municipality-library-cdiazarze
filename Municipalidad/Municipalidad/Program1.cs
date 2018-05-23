@@ -17,10 +17,10 @@ namespace Municipalidad
       List<Address> propiedades = new List<Address>();
       List<Car> autos = new List<Car>();
       int option = 0;
-      while (option < 6)
+      while (option < 7)
       {
         Console.WriteLine("Bievenido al programa del registro civil, que desea hacer:\n(1) Registrar Persona\n(2) Registrar Propiedad\n(3) " +
-          "Registar Vehiculo\n(4) Modificar Propiedad\n(5) Modificar Dueño de Automovil\n");
+          "Registar Vehiculo\n(4) Modificar Propiedad\n(5) Modificar Dueño de Automovil\n(6) Modificar Resgistro Persona");
         option = Int32.Parse(Console.ReadLine());
         if (option == 1)
         {
@@ -157,6 +157,45 @@ namespace Municipalidad
             else Console.WriteLine("No existen personas registradas, debe registrar primero al nuevo dueño");
           }
           else Console.WriteLine("No existen autos registrados, debe registrar primero algun vehiculo");
+        }
+        else if (option == 6)
+        {
+
+          if (personas.Count > 0)
+          {
+            Console.WriteLine("Seleccione registro de persona a modificar");
+            for (int j = 0; j < personas.Count(); j++)
+            {
+              Console.WriteLine("(" + (j + 1) + ") " + personas[j].Rut + ": " + personas[j].First_name + " " + personas[j].Last_name);
+            }
+            Person p = personas[Int32.Parse(Console.ReadLine()) - 1];
+            int eleccion2 = 0;
+            while (eleccion2 < 4)
+            {
+              Console.WriteLine("\nQue desea Modificar?\n(1) Cambiar Nombre\n(2) Cambiar Apellido\n(3) " +
+              "Ser abandonado\n(4) Ser Adoptado\n(5) Volver\n");
+              eleccion2 = Int32.Parse(Console.ReadLine());
+              if (eleccion2 == 1)
+              {
+                Console.WriteLine("Ingrese Nuevo Nombre:\n");
+                p.changeFirstName(Console.ReadLine());
+                Console.WriteLine("Cambiado el nombre con exito a: "+ p.First_name);
+              }
+              if (eleccion2 == 2)
+              {
+                Console.WriteLine("Ingrese Nuevo Apellido:\n");
+                p.changeLastName(Console.ReadLine());
+                Console.WriteLine("Cambiado el apellido con exito a: "+ p.Last_name);
+              }
+              if (eleccion2 == 3)
+              {
+                p.getAbandoned();
+                Console.WriteLine("Exito! Usted ya no tiene padres!: ");
+              }
+
+            }
+          }
+          else Console.WriteLine("No existen personas registrados, debe registrar primero alguna persona");
         }
       }
     }
