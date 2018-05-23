@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Municipalidad
 {
-  class Program
+  class Program1
   {
     static void Main(string[] args)
     {
@@ -50,16 +50,9 @@ namespace Municipalidad
         {
           foreach (MethodInfo method in methods)
           {
+            sb += (String.Format("Method info: {0} {1} ({2})\n", method.ReturnType.ToString(), method.Name.ToString(), method.MethodImplementationFlags.ToString()));
 
-
-
-            try
-            {
-              sb += (String.Format("Method info: {0}\n", type.GetMethod(method.Name)));
-            }
-            catch { }
             sb += ("***\n");
-
           }
         }
 
