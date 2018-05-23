@@ -17,10 +17,10 @@ namespace Municipalidad
       List<Address> propiedades = new List<Address>();
       List<Car> autos = new List<Car>();
       int option = 0;
-      while (option < 5)
+      while (option < 6)
       {
         Console.WriteLine("Bievenido al programa del registro civil, que desea hacer:\n(1) Registrar Persona\n(2) Registrar Propiedad\n(3) " +
-          "Registar Vehiculo\n(4) Modificar Propiedad\n");
+          "Registar Vehiculo\n(4) Modificar Propiedad\n(5) Modificar Dueño de Automovil\n");
         option = Int32.Parse(Console.ReadLine());
         if (option == 1)
         {
@@ -79,11 +79,12 @@ namespace Municipalidad
           int seatbelts = Int32.Parse(Console.ReadLine());
           Console.WriteLine("Diesel? (Y/N):\n");
           if (Console.ReadLine().ToUpper().Equals("N")) { diesel = false; }
-          Car c=new Car(brand, model, year, null, license_plate, seatbelts, diesel);
+          Car c = new Car(brand, model, year, null, license_plate, seatbelts, diesel);
           autos.Add(c);
-          Console.WriteLine("Se ha registrado correctamente el automovil en: " + c.Model+ ", Modelo: " + c.Model + ", Patente: " + c.License_plate);
+          Console.WriteLine("Se ha registrado correctamente el automovil en: " + c.Model + ", Modelo: " + c.Model + ", Patente: " + c.License_plate);
         }
-        else if(option==4){
+        else if (option == 4)
+        {
           int eleccion = 0;
           int eleccion2 = 0;
           if (propiedades.Count > 0)
@@ -105,7 +106,7 @@ namespace Municipalidad
               {
                 Console.WriteLine("Ingrese cuantos Baños va a agregar:\n");
                 a.addBathrooms(Int32.Parse(Console.ReadLine()));
-                Console.WriteLine("Se agregaron correctamente, Baños actuales: "+ a.Bathrooms);
+                Console.WriteLine("Se agregaron correctamente, Baños actuales: " + a.Bathrooms);
               }
               else if (eleccion2 == 2)
               {
@@ -130,6 +131,32 @@ namespace Municipalidad
             }
           }
           else Console.WriteLine("No existen propiedades registradas");
+        }
+        else if (option == 5)
+        {
+          int eleccion = 0;
+          if (autos.Count > 0)
+          {
+            Console.WriteLine("\nElija auto a modificar:");
+            for (int i = 0; i < autos.Count(); i++)
+            {
+              Console.WriteLine("(" + (i + 1) + ") " + autos[i].Brand + ", " + autos[i].Model + ", " + autos[i].License_plate);
+            }
+            eleccion = Int32.Parse(Console.ReadLine());
+            Car c = autos[eleccion - 1];
+            if (personas.Count > 0)
+            {
+              Console.WriteLine("Seleccione nuevo dueño, si no existe, debe volver al menu y registrarlo primero");
+              for (int j = 0; j < personas.Count(); j++)
+              {
+                Console.WriteLine("(" + (j + 1) + ") " + personas[j].Rut + ": " + personas[j].First_name + " " + personas[j].Last_name);
+              }
+              c.giveUpOwnershipToThirdParty(personas[Int32.Parse(Console.ReadLine()) - 1]);
+              Console.WriteLine("Se cambia correctamente");
+            }
+            else Console.WriteLine("No existen personas registradas, debe registrar primero al nuevo dueño");
+          }
+          else Console.WriteLine("No existen autos registrados, debe registrar primero algun vehiculo");
         }
       }
     }
